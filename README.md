@@ -90,6 +90,7 @@ PUT http://localhost:8080/libros/1
 
 ```json
 {
+  "id" : 1
   "titulo": "El Principito (Actualizado)",
   "autor": "Antoine de Saint-Exupéry"
 }
