@@ -44,7 +44,7 @@ Está orientado a practicar desarrollo backend, uso de APIs y conceptos de progr
 1. Clonar el repositorio:
 
 ```
-git clone https://github.com/tu-usuario/tu-repositorio.git
+git clone https://github.com/Gabrielex3/bibliotecav1.git
 ```
 
 2. Abrir el proyecto en IntelliJ IDEA
