@@ -117,7 +117,7 @@ src/
 
 ## 👤 Autor
 
-* Gabriel Exe
+* 
 
 ---
 
