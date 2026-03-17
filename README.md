@@ -31,11 +31,11 @@ Está orientado a practicar desarrollo backend, uso de APIs y conceptos de progr
 
 | Método | Endpoint     | Descripción              |
 | ------ | ------------ | ------------------------ |
-| GET    | /libros      | Obtener todos los libros |
-| GET    | /libros/{id} | Obtener libro por ID     |
-| POST   | /libros      | Crear un libro           |
-| PUT    | /libros/{id} | Actualizar un libro      |
-| DELETE | /libros/{id} | Eliminar un libro        |
+| GET    | api/v1/libros      | Obtener todos los libros |
+| GET    | api/v1/libros/{id} | Obtener libro por ID     |
+| POST   | api/v1/libros      | Crear un libro           |
+| PUT    | api/v1/libros/{id} | Actualizar un libro      |
+| DELETE | api/v1/libros/{id} | Eliminar un libro        |
 
 ---
 
@@ -76,6 +76,7 @@ Content-Type: application/json
 
 ```json
 {
+  "id" : 1
   "titulo": "El Principito",
   "autor": "Antoine de Saint-Exupéry"
 }
