@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public class LibroRepository {
 
-    private List<libro> listaLibros = new ArrayList<>();
+    private final List<libro> listaLibros = new ArrayList<>();
 
 
     public List<libro> obtenerLibros() {
@@ -40,14 +40,34 @@ public class LibroRepository {
 
     public libro actualizarLibro(libro lib) {
         int id = 0;
-        int idPosition = 0;
-        for (int i=0; 1 <listaLibros.size(); i++){
+        int idPosicion = 0;
+
+        for (int i = 0; i < listaLibros.size(); i++){
             if (listaLibros.get(i).getId() == lib.getId()){
                 id = lib.getId();
-                idPosition = 1;
+                idPosicion = i;
             }
         }
 
+        libro libro1 = new libro();
+        libro1.setId(id);
+        libro1.setTitulo(lib.getTitulo());
+        libro1.setAutor(lib.getAutor());
+        libro1.setFechaPublicacion(lib.getFechaPublicacion());
+        libro1.setEditorial(lib.getEditorial());
+        libro1.setIsbn(lib.getIsbn());
 
+        listaLibros.set(idPosicion,libro1);
+        return libro1;
     }
+
+    public void eliminar(int id){
+        libro libro = buscarLibroPorId(id);
+        if(libro!=null){
+            listaLibros.remove(libro);
+        }
+        listaLibros.remove(libro);
+    }
+
+
 }
