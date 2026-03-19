@@ -25,20 +25,29 @@ public class libroController {
         return libroService.saveLibro(libro);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/id/{id}")
     public libro buscarLibro(@PathVariable int id){
         return libroService.getLibroId(id);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/id/{id}")
     public libro actualizarLibro(@PathVariable int id, @RequestBody libro libro){
         return libroService.updateLibro(libro);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/id/{id}")
     public String eliminarLibro(@PathVariable int id){
         return libroService.deleteLibro(id);
     }
+
+    @GetMapping("/total")
+    public int totalLibroV2(){return libroService.totalLibro2();}
+
+    @GetMapping("/isbn/{strb}")
+    public libro buscarLibroStbr(@PathVariable String strb){
+        return libroService.getLibroIsbn(strb);
+    }
+
 
 }
 
