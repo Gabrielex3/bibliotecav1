@@ -25,7 +25,8 @@ public class libroController {
         return libroService.saveLibro(libro);
     }
 
-    @GetMapping("/id/{id}")
+
+    @GetMapping("buscador/id/{id}")
     public libro buscarLibro(@PathVariable int id){
         return libroService.getLibroId(id);
     }
@@ -35,7 +36,7 @@ public class libroController {
         return libroService.updateLibro(libro);
     }
 
-    @DeleteMapping("/id/{id}")
+    @DeleteMapping("buscador/id/{id}")
     public String eliminarLibro(@PathVariable int id){
         return libroService.deleteLibro(id);
     }
@@ -43,14 +44,18 @@ public class libroController {
     @GetMapping("/total")
     public int totalLibroV2(){return libroService.totalLibro2();}
 
-    @GetMapping("/isbn/{strb}")
+    @GetMapping("buscador/isbn/{strb}")
     public libro buscarLibroStbr(@PathVariable String strb){
         return libroService.getLibroIsbn(strb);
     }
 
-    @GetMapping("/getAnio/{year}")
+    @GetMapping("buscador/getAnioLista/{year}")
     public List<libro> getTotalLibrosAnio(@PathVariable int year){
         return libroService.getTotalLibrosAnio(year);
+    }
+    @GetMapping("buscador/getAnioContador/{year}")
+    public String getTotalLibrosContador(@PathVariable int year){
+        return "EL TOTAL DE LIBROS LO CUALES SON DEL ANIO : "+year+" Son en total :"+ libroService.getTotaLibrosAnioContador(year);
     }
 
 

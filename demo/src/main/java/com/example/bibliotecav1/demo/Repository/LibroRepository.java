@@ -97,4 +97,13 @@ public class LibroRepository {
 
         return listaLibrosAnio;
     }
+
+    public int totalLibrosContador(int anio){
+        int contador = 0;
+        for (libro libro : listaLibros){
+            if (libro.getFechaPublicacion() == anio) {
+                contador++;
+            }
+        }
+        return contador;}
 }

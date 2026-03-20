@@ -42,4 +42,8 @@ public class LibroService {
     public List<libro> getTotalLibrosAnio(int year) {
         return libroRepository.buscarAnio(year);
     }
+    public int getTotaLibrosAnioContador(int year){
+        return libroRepository.totalLibrosContador(year);
+    }
+
 }
