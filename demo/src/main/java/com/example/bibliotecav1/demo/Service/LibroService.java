@@ -38,4 +38,8 @@ public class LibroService {
 
     public int totalLibro1(){return libroRepository.obtenerLibros().size();}
     public int totalLibro2(){return libroRepository.totalLibros();}
+
+    public List<libro> getTotalLibrosAnio(int year) {
+        return libroRepository.buscarAnio(year);
+    }
 }

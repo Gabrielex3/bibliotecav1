@@ -48,6 +48,11 @@ public class libroController {
         return libroService.getLibroIsbn(strb);
     }
 
+    @GetMapping("/getAnio/{year}")
+    public List<libro> getTotalLibrosAnio(@PathVariable int year){
+        return libroService.getTotalLibrosAnio(year);
+    }
+
 
 }
 

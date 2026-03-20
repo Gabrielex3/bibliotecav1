@@ -18,9 +18,9 @@ public class LibroRepository {
         listaLibros.add(new libro(5, "9780439139601", "Harry Potter y el prisionero de Azkaban", "Scholastic", 1999, "J. K. Rowling"));
         listaLibros.add(new libro(6, "9780439136365", "Harry Potter y el cáliz de fuego", "Scholastic", 2000, "J. K. Rowling"));
         listaLibros.add(new libro(7, "9780321127426", "Effective Java", "Addison- Wesley", 2008, "Joshua Bloch"));
-        listaLibros.add(new libro(8, "9780134685991", "Clean Architecture", "Prentice Hall", 2017, "Robert C. Martin"));
+        listaLibros.add(new libro(8, "9780134685991", "Clean Architecture", "Prentice Hall", 2014, "Robert C. Martin"));
         listaLibros.add(new libro(9, "9780201633610", "Design Patterns", "Addison- Wesley", 1994, "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides"));
-        listaLibros.add(new libro(10, "9780132350884", "Clean Code", "Prentice Hall", 2008, "Robert C. Martin"));
+        listaLibros.add(new libro(10, "9780132350884", "Clean Code", "Prentice Hall", 2014, "Robert C. Martin"));
     }
 
 
@@ -86,4 +86,15 @@ public class LibroRepository {
     public int totalLibros(){return listaLibros.size();}
 
 
+    public List<libro> buscarAnio(int anio) {
+        List<libro> listaLibrosAnio = new ArrayList<>();
+
+        for (libro libro : listaLibros) {
+            if (libro.getFechaPublicacion() == anio) {
+                listaLibrosAnio.add(libro);
+            }
+        }
+
+        return listaLibrosAnio;
+    }
 }
