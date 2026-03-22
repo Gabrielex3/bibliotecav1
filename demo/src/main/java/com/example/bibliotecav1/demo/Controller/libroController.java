@@ -58,6 +58,21 @@ public class libroController {
         return "EL TOTAL DE LIBROS LO CUALES SON DEL ANIO : "+year+" Son en total :"+ libroService.getTotaLibrosAnioContador(year);
     }
 
+    @GetMapping("buscador/getForAutor/{autor}")
+    public libro getForAutor(@PathVariable String autor){
+        return libroService.getForAutor(autor);
+    }
+
+    @GetMapping("buscador/masAntiguo")
+    public libro getMoreOld(){
+        return libroService.getMoreOld();
+    }
+
+    @GetMapping("buscador/masNuevo")
+    public libro getMoreNew(){
+        return libroService.getMoreNew();
+    }
+
 
 }
 

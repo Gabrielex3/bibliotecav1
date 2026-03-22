@@ -106,4 +106,37 @@ public class LibroRepository {
             }
         }
         return contador;}
+
+    public libro buscarPorAutor(String autor) {
+        for (libro libro : listaLibros) {
+            if (libro.getAutor().equals(autor)) {
+                return libro;
+            }
+        }
+        return null;
+    }
+
+    public libro masAntiguo() {
+        libro masAntiguo = listaLibros.getFirst();
+
+        for (libro libro : listaLibros) {
+            if (libro.getFechaPublicacion() < masAntiguo.getFechaPublicacion()) {
+                masAntiguo = libro;
+            }
+        }
+
+        return masAntiguo;
+    }
+
+    public libro masNuevo() {
+        libro masNuevo = listaLibros.getFirst();
+
+        for (libro libro : listaLibros) {
+            if (libro.getFechaPublicacion() > masNuevo.getFechaPublicacion()) {
+                masNuevo = libro;
+            }
+        }
+
+        return masNuevo;
+    }
 }

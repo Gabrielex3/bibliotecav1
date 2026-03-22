@@ -46,4 +46,16 @@ public class LibroService {
         return libroRepository.totalLibrosContador(year);
     }
 
+    public libro getForAutor(String autor){
+        return libroRepository.buscarPorAutor(autor);
+    }
+
+    public libro getMoreOld() {
+        return libroRepository.masAntiguo();
+    }
+
+    public libro getMoreNew() {
+        return libroRepository.masNuevo();
+    }
+
 }
