@@ -1,5 +1,6 @@
 package com.example.bibliotecav1.demo.Model;
 
+import com.example.bibliotecav1.demo.Repository.LibroRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class libro {
     private String editorial;
     private int fechaPublicacion;
     private String autor;
+
 }

@@ -1,6 +1,7 @@
 package com.example.bibliotecav1.demo.Controller;
 
 import com.example.bibliotecav1.demo.Model.libro;
+import com.example.bibliotecav1.demo.Model.prestamo;
 import com.example.bibliotecav1.demo.Service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +73,8 @@ public class libroController {
     public libro getMoreNew(){
         return libroService.getMoreNew();
     }
+
+
 
 
 }
