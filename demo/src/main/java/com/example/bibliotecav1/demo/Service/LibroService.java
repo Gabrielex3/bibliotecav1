@@ -37,7 +37,7 @@ public class LibroService {
         return "Producto Eliminado";
     }
 
-    public int totalLibro1(){return libroRepository.obtenerLibros().size();}
+    //public int totalLibro1(){return libroRepository.obtenerLibros().size();}
     public int totalLibro2(){return libroRepository.totalLibros();}
 
     public List<libro> getTotalLibrosAnio(int year) {
