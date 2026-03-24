@@ -1,132 +1,62 @@
-# 📚 Sistema de Gestión de Biblioteca
+# 📚 Sistema de Gestión de Biblioteca (API REST)
 
 ## 📌 Descripción
 
-Este proyecto consiste en una biblioteca desarrollada en IntelliJ IDEA que permite gestionar una colección de libros mediante una API REST en localhost. El sistema implementa funcionalidades para crear, eliminar, actualizar y consultar libros almacenados en una lista o estructura de datos.
+Este proyecto es el backend de un sistema de biblioteca desarrollado en Java utilizando el framework Spring Boot. Permite gestionar una colección de libros y sus respectivos préstamos mediante una API REST local. El sistema almacena la información en memoria y expone rutas (endpoints) para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) completas.
 
-Está orientado a practicar desarrollo backend, uso de APIs y conceptos de programación orientada a objetos (POO).
-
----
-
-## ⚙️ Tecnologías utilizadas
-
-* Java
-* IntelliJ IDEA
-* Spring Boot (API REST)
-* JSON
-* HTTP (GET, POST, PUT, DELETE)
+Proyecto orientado a la aplicación de conceptos de Programación Orientada a Objetos (POO), arquitectura de software por capas (Controller, Service, Repository, Model) y diseño de APIs RESTful.
 
 ---
 
-## 🚀 Funcionalidades
+## ⚙️ Tecnologías Utilizadas
 
-* ➕ Crear libros
-* ❌ Eliminar libros
-* ✏️ Actualizar libros
-* 📖 Obtener lista de libros
+* **Lenguaje:** Java 21+
+* **Framework:** Spring Boot
+* **Herramientas:** Lombok (para reducción de código repetitivo)
+* **Formato de datos:** JSON
+* **Protocolo:** HTTP (GET, POST, PUT, DELETE)
+* **Entorno de Desarrollo:** IntelliJ IDEA
+
+---
+
+## 🚀 Funcionalidades Principales
+
+* 📖 **Gestión de Libros:** Registro, actualización, eliminación y listado general.
+* 🤝 **Gestión de Préstamos:** Registro de préstamos vinculados automáticamente a la información completa del libro correspondiente.
+* 🔍 **Búsquedas Personalizadas:** * Búsqueda por ID e ISBN.
+  * Búsqueda por Autor.
+  * Filtrado por año de publicación y conteo total.
+  * Identificación del libro más antiguo y más nuevo.
 
 ---
 
 ## 🌐 Endpoints de la API
 
-| Método | Endpoint     | Descripción              |
-| ------ | ------------ | ------------------------ |
-| GET    | api/v1/libros      | Obtener todos los libros |
-| GET    | api/v1/libros/{id} | Obtener libro por ID     |
-| POST   | api/v1/libros      | Crear un libro           |
-| PUT    | api/v1/libros/{id} | Actualizar un libro      |
-| DELETE | api/v1/libros/{id} | Eliminar un libro        |
+### 📚 Endpoints de Libros (`/api/v1/libros`)
+| Método | Ruta | Descripción |
+| :--- | :--- | :--- |
+| **GET** | `/api/v1/libros` | Lista todos los libros registrados |
+| **GET** | `/api/v1/libros/buscador/id/{id}` | Busca un libro por su ID único |
+| **POST** | `/api/v1/libros` | Crea un nuevo registro de libro |
+| **PUT** | `/api/v1/libros/id/{id}` | Actualiza la información de un libro |
+| **DELETE** | `/api/v1/libros/buscador/id/{id}` | Elimina un libro del sistema |
+| **GET** | `/api/v1/libros/buscador/isbn/{isbn}` | Busca un libro por su código ISBN |
+| **GET** | `/api/v1/libros/buscador/getForAutor/{autor}`| Lista libros de un autor específico |
+| **GET** | `/api/v1/libros/buscador/getAnioLista/{year}`| Lista libros publicados en un año dado |
+
+### 🤝 Endpoints de Préstamos (`/api/v1/prestamos`)
+| Método | Ruta | Descripción |
+| :--- | :--- | :--- |
+| **GET** | `/api/v1/prestamos` | Lista todos los préstamos activos |
+| **GET** | `/api/v1/prestamos/{id}` | Muestra el detalle de un préstamo por ID |
+| **POST** | `/api/v1/prestamos` | Registra un nuevo préstamo |
+| **PUT** | `/api/v1/prestamos/{id}` | Modifica los datos de un préstamo |
+| **DELETE** | `/api/v1/prestamos/{id}` | Cancela o elimina un préstamo |
 
 ---
 
-## ▶️ Cómo ejecutar el proyecto
+## ▶️ Cómo ejecutar el proyecto en Localhost
 
-1. Clonar el repositorio:
-
-```
-git clone https://github.com/Gabrielex3/bibliotecav1.git
-```
-
-2. Abrir el proyecto en IntelliJ IDEA
-
-3. Ejecutar la aplicación (clase principal de Spring Boot)
-
-4. El servidor se iniciará en:
-
-```
-http://localhost:8080
-```
-
----
-
-## 🧪 Ejemplo de uso (API en localhost)
-
-### 🔹 Obtener todos los libros
-
-```
-GET http://localhost:8080/libros
-```
-
-### 🔹 Crear un libro
-
-```
-POST http://localhost:8080/libros
-Content-Type: application/json
-```
-
-```json
-{
-  "id" : 1
-  "titulo": "El Principito",
-  "autor": "Antoine de Saint-Exupéry"
-}
-```
-
-### 🔹 Actualizar un libro
-
-```
-PUT http://localhost:8080/libros/1
-```
-
-```json
-{
-  "id" : 1
-  "titulo": "El Principito (Actualizado)",
-  "autor": "Antoine de Saint-Exupéry"
-}
-```
-
-### 🔹 Eliminar un libro
-
-```
-DELETE http://localhost:8080/libros/1
-```
-
----
-
-## 🧩 Estructura del proyecto
-
-```
-src/
- ├── controller/   // Controladores REST
- ├── model/        // Clases (Libro)
- ├── service/      // Lógica de negocio
- └── main/         // Clase principal
-```
-
----
-
-## 👤 Autor
-
-* 
-
----
-
-## 📌 Notas
-
-Este proyecto puede mejorarse agregando:
-
-* Base de datos (MySQL, PostgreSQL)
-* Validaciones
-* Seguridad (Spring Security)
-* Documentación con Swagger
+1. Clona este repositorio en tu máquina local:
+   ```bash
+   git clone [https://github.com/Gabrielex3/bibliotecav1/tree/V3.git](https://github.com/Gabrielex3/bibliotecav1/tree/V3.git)
