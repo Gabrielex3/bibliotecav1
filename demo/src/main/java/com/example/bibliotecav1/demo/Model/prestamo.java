@@ -17,8 +17,6 @@ public class prestamo{
     private Date fecha_entrega=null;
     private int cantidad_dias;
     private int multas=0;
-
-
 }
 
 

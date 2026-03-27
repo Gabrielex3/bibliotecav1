@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Biblioteca Universitario</title>
+    <style>
+        /* ================= VARIABLES DE COLOR Y ESTILO (MÁS AMIGABLES) ================= */
+        :root {
+            /* Paleta principal: Fresca, luminosa y accesible */
+            --primary: #4361ee; /* Azul suave y moderno */
+            --primary-hover: #3a53d0;
+            --secondary: #8d99ae; /* Gris azulado claro */
+            --secondary-hover: #7b8699;
+            --danger: #ef233c; /* Rojo brillante pero no agresivo */
+            --danger-hover: #d90429;
+
+            /* Degradado amigable para el header */
+            --header-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+
+            /* Colores de fondo y texto */
+            --bg-body: #f4f7f6; /* Fondo casi blanco, muy suave */
+            --bg-section: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #2b2d42; /* Azul marino muy oscuro, menos duro que el negro */
+            --text-muted: #6c757d;
+
+            /* Sombras más suaves y difuminadas */
+            --shadow-sm: 0 2px 4px rgba(149, 157, 165, 0.1);
+            --shadow-md: 0 8px 24px rgba(149, 157, 165, 0.15);
+
+            /* Bordes más redondeados para un aspecto "burbuja/amigable" */
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-pill: 50px; /* Botones tipo píldora */
+        }
+
+        /* ================= ESTILOS GENERALES Y RESETEOS ================= */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif; /* Fuentes más redondas */
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        h1, h2, h3 { color: var(--text-main); font-weight: 700; letter-spacing: -0.5px; }
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1.05rem; }
+
+        /* ================= BARRA DE NAVEGACIÓN (HEADER AMIGABLE) ================= */
+        nav {
+            background: var(--header-gradient);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.2); /* Sombra que combina con el degradado */
+        }
+        nav h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        nav .logo-icon { font-size: 2rem; }
+        nav div { display: flex; gap: 12px; }
+
+        /* ================= BOTONES ================= */
+        button {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: var(--radius-pill); /* Forma de píldora */
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+        button:hover {
+            transform: translateY(-2px); /* Efecto de que el botón se levanta al pasar el mouse */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        button:active { transform: translateY(0); }
+
+        /* Colores de Botones */
+        button, button[type="submit"]:not(.btn-danger) { background-color: var(--primary); color: white; }
+        button:hover, button[type="submit"]:not(.btn-danger):hover { background-color: var(--primary-hover); }
+
+        .btn-danger, #btn-cerrar-sesion { background-color: var(--danger) !important; color: white !important; }
+        .btn-danger:hover, #btn-cerrar-sesion:hover { background-color: var(--danger-hover) !important; }
+
+        .btn-secondary, #btn-volver-nav, .volverInicio { background-color: white !important; color: var(--text-main) !important; border: 1px solid #ddd; }
+        .btn-secondary:hover, #btn-volver-nav:hover, .volverInicio:hover { background-color: #f8f9fa !important; border-color: #ccc; }
+
+        /* Excepción para botones en el nav para que destaquen sobre el degradado */
+        nav button { background-color: rgba(255, 255, 255, 0.2) !important; color: white !important; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); }
+        nav button:hover { background-color: white !important; color: var(--primary) !important; }
+
+        /* ================= SECCIONES (TARJETAS) ================= */
+        section {
+            background: var(--bg-section);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        /* ================= FORMULARIOS ================= */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        input {
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: var(--text-main);
+            background-color: #fcfcfc;
+        }
+        input:focus {
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+            outline: none;
+        }
+
+        .admin-panel {
+            background-color: #f8faff;
+            border: 2px dashed #bcdcff;
+            padding: 25px;
+            margin-bottom: 35px;
+            border-radius: var(--radius-lg);
+        }
+        .admin-panel h3 { margin-top: 0; color: var(--primary); }
+
+        /* ================= TABLAS ================= */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 25px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background-color: #f8fafc; }
+        td strong { color: var(--primary); font-weight: 800; }
+
+        /* ================= MENU PRINCIPAL ================= */
+        .menu-principal {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .menu-principal button {
+            font-size: 1.2rem;
+            padding: 25px 50px;
+            border-radius: var(--radius-lg); /* Un poco menos redondo que una píldora para botones gigantes */
+            box-shadow: var(--shadow-md);
+            flex: 1;
+            max-width: 320px;
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid transparent;
+        }
+        .menu-principal button:hover {
+            border-color: var(--primary);
+            background-color: #f8faff;
+            transform: translateY(-5px);
+        }
+
+        /* ================= UTILIDADES ================= */
+        .oculta { display: none !important; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            nav { padding: 1.5rem; flex-direction: column; gap: 20px; text-align: center; }
+            nav div { flex-direction: column; width: 100%; }
+            nav button { width: 100%; }
+            section { padding: 20px; }
+            .menu-principal { flex-direction: column; align-items: center; }
+            .menu-principal button { max-width: 100%; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2><span class="logo-icon">📚</span> Mi Biblioteca</h2>
+    <div>
+        <button id="btn-volver-nav" class="volverInicio oculta">🏠 Inicio</button>
+        <button id="btn-ir-login">Iniciar Sesión</button>
+        <button id="btn-cerrar-sesion" class="oculta" style="background-color: rgba(255,255,255,0.2) !important;">Cerrar Sesión</button>
+    </div>
+</nav>
+
+<section id="seccionInicio">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h1>¡Hola! Bienvenido al portal 👋</h1>
+        <p>Selecciona una de las opciones a continuación para explorar los libros disponibles o revisar el estado de los préstamos.</p>
+    </div>
+
+    <div class="menu-principal">
+        <button id="btnIrLibros">
+            <span style="font-size: 1.5rem;">📖</span> Catálogo de Libros
+        </button>
+        <button id="btnIrPrestamos">
+            <span style="font-size: 1.5rem;">🏷️</span> Registro de Préstamos
+        </button>
+    </div>
+</section>
+
+<section id="seccion-login" class="oculta" style="max-width: 450px; margin: 0 auto; text-align: center;">
+    <h1 style="margin-bottom: 5px;">Acceso Admin</h1>
+    <p style="margin-bottom: 25px;">Ingresa tus credenciales para gestionar la biblioteca.</p>
+
+    <form id="formulario-login">
+        <input type="text" id="usuario" placeholder="Usuario (admin)" required style="margin-bottom: 15px; text-align: center;">
+        <input type="password" id="password" placeholder="Contraseña (123)" required style="margin-bottom: 25px; text-align: center;">
+        <button type="submit" style="width: 100%; padding: 16px;">Entrar al Sistema</button>
+    </form>
+
+    <p id="mensaje-error" style="color: var(--danger); margin-top: 15px; font-weight: 700;" class="oculta">Usuario o contraseña incorrectos.</p>
+    <button class="volverInicio btn-secondary" style="width: 100%; margin-top: 15px;">Volver atrás</button>
+</section>
+
+<section id="seccionLibros" class="oculta">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 20px; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+        <h1 style="margin: 0;">Catálogo de Libros</h1>
+        <button id="btnVerLibros" class="btn-secondary">🔄 Actualizar</button>
+    </div>
+
+    <div class="admin-panel admin-only oculta">
+        <h3>✨ Añadir Nuevo Libro</h3>
+        <form id="formLibro">
+            <div class="form-grid">
+                <input type="text" id="tituloLibro" placeholder="Título del libro" required>
+                <input type="text" id="autorLibro" placeholder="Autor" required>
+                <input type="text" id="editorialLibro" placeholder="Editorial">
+                <input type="text" id="isbnLibro" placeholder="ISBN">
+                <input type="number" id="anioLibro" placeholder="Año Publicación">
+            </div>
+            <button type="submit">➕ Guardar Libro</button>
+        </form>
+        <hr style="margin: 30px 0; border: 0; border-top: 2px dashed #bcdcff;">
+        <h3>🗑️ Borrar Libro</h3>
+        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+            <input type="number" id="idEliminarLibro" placeholder="Ingresa el ID" style="max-width: 200px;">
+            <button id="btnEliminarLibro" class="btn-danger">Eliminar Libro</button>
+        </div>
+    </div>
+
+    <div id="contenedorTablaLibros" style="overflow-x: auto;"></div>
+</section>
+
+<section id="seccionPrestamos" class="oculta">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 20px; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+        <h1 style="margin: 0;">Registro de Préstamos</h1>
+        <button id="btnVerPrestamos" class="btn-secondary">🔄 Actualizar</button>
+    </div>
+
+    <div class="admin-panel admin-only oculta">
+        <h3>✨ Registrar Préstamo</h3>
+        <form id="formPrestamo">
+            <div class="form-grid">
+                <input type="number" id="idLibroPrestamo" placeholder="ID del Libro" required>
+                <input type="text" id="runSolicitante" placeholder="RUN del Solicitante" required>
+                <input type="number" id="cantidadDias" placeholder="Días de préstamo" required>
+            </div>
+            <button type="submit">➕ Crear Préstamo</button>
+        </form>
+        <hr style="margin: 30px 0; border: 0; border-top: 2px dashed #bcdcff;">
+        <h3>🗑️ Finalizar o Cancelar</h3>
+        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+            <input type="number" id="idEliminarPrestamo" placeholder="Ingresa el ID" style="max-width: 200px;">
+            <button id="btnEliminarPrestamo" class="btn-danger">Eliminar Préstamo</button>
+        </div>
+    </div>
+
+    <div id="contenedorTablaPrestamos" style="overflow-x: auto;"></div>
+</section>
+
+<script src="/app.js"></script>
+
+</body>
+</html>

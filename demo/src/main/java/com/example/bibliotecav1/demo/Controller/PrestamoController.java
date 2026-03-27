@@ -1,5 +1,6 @@
 package com.example.bibliotecav1.demo.Controller;
 
+import com.example.bibliotecav1.demo.Model.libro;
 import com.example.bibliotecav1.demo.Model.prestamo;
 import com.example.bibliotecav1.demo.Service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/prestamos") // <--- AQUÍ se mapea la ruta principal
+@RequestMapping("/api/v1/prestamos")
 public class PrestamoController {
 
     @Autowired
@@ -32,5 +33,11 @@ public class PrestamoController {
     @DeleteMapping("/{id}")
     public String eliminarPrestamo(@PathVariable int id){
         return libroService.deletePrestamo(id);
+    }
+
+    @GetMapping("/api/v1/prestamos/html")
+    public String irAPrestamos() {
+        // Al usar "forward:", Spring busca el archivo en la carpeta static internamente
+        return "forward:/index.html";
     }
 }
