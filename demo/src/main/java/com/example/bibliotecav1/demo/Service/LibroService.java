@@ -58,25 +58,6 @@ public class LibroService {
     public libro getMoreNew() {
         return libroRepository.masNuevo();
     }
-    public List<prestamo> getPrestamos() {
-        return libroRepository.getPrestamos();
-    }
 
-    public prestamo savePrestamo(prestamo prest){
-        return libroRepository.guardarPrestamo(prest);
-    }
-
-    public prestamo getPrestamoId(int id){
-        return libroRepository.buscarPrestamoPorId(id);
-    }
-
-    public prestamo actualizarPrestamo(prestamo prest){
-        return libroRepository.actualizarPrestamo(prest);
-    }
-
-    public String deletePrestamo(int id){
-        libroRepository.eliminarPrestamo(id);
-        return "Prestamo Eliminado";
-    }
 
 }
