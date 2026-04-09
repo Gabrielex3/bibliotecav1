@@ -1,11 +1,9 @@
 package com.example.bibliotecav1.demo.Repository;
 
 import com.example.bibliotecav1.demo.Model.libro;
-import com.example.bibliotecav1.demo.Model.prestamo;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Repository
 public class LibroRepository {
@@ -33,7 +31,7 @@ public class LibroRepository {
 
     public libro buscarLibroPorId(Integer id) {
         for (libro libro : listaLibros) {
-            if (libro.getId() == id) {
+            if (libro.getId().equals(id)) {
                 return libro;
             }
         }
@@ -59,7 +57,7 @@ public class LibroRepository {
         int idPosicion = 0;
 
         for (int i = 0; i < listaLibros.size(); i++){
-            if (listaLibros.get(i).getId() == lib.getId()){
+            if (listaLibros.get(i).getId().equals(lib.getId())){
                 id = lib.getId();
                 idPosicion = i;
             }
@@ -77,7 +75,7 @@ public class LibroRepository {
         return libro1;
     }
 
-    public void eliminar(int id){
+    public void eliminar(Integer id){
         libro libro = buscarLibroPorId(id);
         if(libro!=null){
             listaLibros.remove(libro);

@@ -2,7 +2,10 @@ package com.example.bibliotecav1.demo.Controller;
 
 import com.example.bibliotecav1.demo.Model.libro;
 import com.example.bibliotecav1.demo.Service.LibroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,28 +19,45 @@ public class libroController {
     private LibroService libroService;
 
     @GetMapping
-    public List<libro> listarLibros(){
-        return libroService.getLibros();
+    public ResponseEntity <List<libro>> listarLibros(){
+        return ResponseEntity.status(HttpStatus.OK).body(libroService.getLibros());
     }
 
+//    @PostMapping
+//    public libro agregarLibro(@RequestBody libro libro){
+//        return libroService.saveLibro(libro);
+//    }
+
     @PostMapping
-    public libro agregarLibro(@RequestBody libro libro){
-        return libroService.saveLibro(libro);
+    public ResponseEntity <libro> agregarLibro(@Valid @RequestBody libro libro) {
+        // Creo una variable para almacenar la respuesta
+        libro libroGuardado=libroService.saveLibro(libro);
+        // Respondo con código HttpStatus
+        return
+                ResponseEntity.status(HttpStatus.CREATED).body(libroGuardado);
     }
+
 
 
     @GetMapping("buscador/id/{id}")
-    public libro buscarLibro(@PathVariable int id){
-        return libroService.getLibroId(id);
+    public ResponseEntity<?>  buscarLibro(@Valid @PathVariable Integer id){
+       libro libroBuscado = libroService.getLibroId(id);
+        if (libroService.getLibroId(id)!=null) {
+            // Ejemplo 200 OK
+            return ResponseEntity.status(HttpStatus.OK).body(libroBuscado);
+        } else {
+            // Ejemplo 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro con el id "+id+" no encontrado");
+        }
     }
 
     @PutMapping("/id/{id}")
-    public libro actualizarLibro(@PathVariable int id, @RequestBody libro libro){
+    public libro actualizarLibro(@PathVariable Integer id, @RequestBody libro libro){
         return libroService.updateLibro(libro);
     }
 
     @DeleteMapping("buscador/id/{id}")
-    public String eliminarLibro(@PathVariable int id){
+    public String eliminarLibro(@PathVariable Integer id){
         return libroService.deleteLibro(id);
     }
 

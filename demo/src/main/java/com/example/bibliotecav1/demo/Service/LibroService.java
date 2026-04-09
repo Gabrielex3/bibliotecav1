@@ -1,7 +1,6 @@
 package com.example.bibliotecav1.demo.Service;
 
 import com.example.bibliotecav1.demo.Model.libro;
-import com.example.bibliotecav1.demo.Model.prestamo;
 import com.example.bibliotecav1.demo.Repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class LibroService {
         return libroRepository.guardarLibro(libro);
     }
 
-    public libro getLibroId(int id){
+    public libro getLibroId(Integer id){
         return libroRepository.buscarLibroPorId(id);
     }
 
@@ -32,7 +31,7 @@ public class LibroService {
         return libroRepository.actualizarLibro(libro);
     }
 
-    public String deleteLibro(int id){
+    public String deleteLibro(Integer id){
         libroRepository.eliminar(id);
         return "Producto Eliminado";
     }
